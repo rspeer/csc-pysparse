@@ -1,0 +1,136 @@
+Special installation instructions for various platforms
+=======================================================
+
+Win32 using MS VC++ 2008 and ACML 4.3
+-------------------------------------
+
+PySparse was successfully built with Microsoft Visual C++ 2008 (Express Edition)
+together with AMD Core Math Library (ACML) 4.3.0 for Python 2.6.4 and NumPy 1.4.0
+(All the above mentioned software can be obtained free of charge).
+
+In the following it is assumed that ACML is installed into C:\AMD\acml4.3.0
+
+Please follow the following steps to build and install PySparse
+
+1. Copy the three DLL files in the directory C:\AMD\acml4.3.0\ifort32\lib 
+   to the Lib subdirectory of the PySparse.
+
+2. Modify setup.py to use the following settings:
+
+	library_dirs_list= [r"C:\AMD\acml4.3.0\ifort32\lib"]
+	libraries_list = ['libacml_dll', "python26"]
+	superlu_defs = [('USE_VENDOR_BLAS',1), ('F77_CALL_C', 'UPCASE')]
+	superlu_defs += [('NO_TIMER', 1)]
+	f77_defs = [("F77UPPERCASE", "1")]
+	package_data = ['libacml_dll.dll', 'libifcoremd.dll', 'libmmd.dll']
+	compily=[]
+	linky=[]
+
+3. python.exe setup.py build -f
+
+4. python.exe setup.py install -f
+
+The DLL files will be automatically copied to the pysparse install directory. 
+It is not necessary to modify the PATH variable.
+
+Note: To compile the PySpare for debugging the following settings can be used:
+	linky=["/DEBUG"]
+	compily=["/Od", "/Zi"]
+
+
+Win32 using MS VC++ 2008 and ACML 4.3 (statically linked)
+---------------------------------------------------------
+
+These build instructions are similiar to the above ones. However here ACML
+is linked statically, which makes it more suitable for creating a Windows
+Installer.
+
+This type of build requires the presence Fotran standard libraries, which
+are not included in ACML or MSVC++ (they are part of Intel Fotran). It
+assumed that they are available in the directory 
+C:\AMD\acml4.3.0\ifort32\lib\ifort
+
+Please follow the following steps to build and install PySparse
+
+1. Copy the DLL files libifcoremd.dll and libmmd.dll from the directory 
+   C:\AMD\acml4.3.0\ifort32\lib to the Lib subdirectory of the PySparse.
+
+2. Modify setup.py to use the following settings:
+
+	library_dirs_list= [r"C:\AMD\acml4.3.0\ifort32\lib", r"C:\AMD\acml4.3.0\ifort32\lib\ifort"]
+	libraries_list = ['libacml', "python26"]
+	superlu_defs = [('USE_VENDOR_BLAS',1), ('F77_CALL_C', 'UPCASE')]
+	if sys.platform == 'win32':
+		superlu_defs += [('NO_TIMER', 1)]
+	f77_defs = [("F77UPPERCASE", "1")]
+	package_data = ['libifcoremd.dll', 'libmmd.dll']
+	compily=[]
+	linky=[]
+
+3. python.exe setup.py build -f
+
+4. python.exe setup.py install -f
+
+The DLL files will be automatically copied to the pysparse install directory. 
+It is not necessary to modify the PATH variable.
+
+
+Win32 using MS VC++ 6.0 and Intel MKL
+-------------------------------------
+
+PySparse was successfully built with Microsoft Visual C++ 6.0 together
+with the Intel Math Kernel Library (MKL).
+
+When adjusting "setup.py" you can use the settings under "elif hostname
+== 'Rivendell':" and change the library_dirs_list according to your
+MKL installation.
+
+Before running the setup script please make sure that the VC++
+executables are in your PATH environment variable.
+
+It is also important that you include the directory containing the MKL
+DLLs in your PATH environment variable. Otherwise runtime errors will
+occur when PySparse is imported and called.
+
+
+Win32 using MinGW
+-----------------
+
+1. Follow the instructions at http://sebsauvage.net/python/mingw.html
+   to
+
+   - install MinGW
+
+   - build libpythonXX.a from python.dll
+
+   - Note that enthought python comes with libpythonXX.a
+
+2. Install BLAS/LAPACK
+
+   - Download the LAPACK and BLAS sources from
+     http://www.netlib.org.
+
+   - Follow the included instructions to build the libraries using the
+     MinGW development tools.
+
+   - Install the libraries in your MinGW tree.
+
+   - Pre-compiled libraries for windows are available in Tools/win32_blas_lapack
+
+3. Build pysparse
+
+   - set PATH=C:\mingw\bin
+
+   - Customize setup.py (this should not now be necessary):
+
+     Your should use the following settings:
+	libraries_list = ['lapack', 'blas', 'g2c']
+    	superlu_defs = [("NO_TIMER",1), ('USE_VENDOR_BLAS',1)]
+
+   - Build build and install:
+
+     C:\pythonXX\python setup.py build --compiler mingw32 bdist --format=wininst
+
+   - Build a distribution for windows:
+
+     C:\pythonXX\python setup.py build --compiler=mingw32 --install
