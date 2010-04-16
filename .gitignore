@@ -4,3 +4,4 @@
 *.egg-info
 __config__.py
 build/
+dist/
