@@ -4,3 +4,5 @@ recursive-include pysparse *.py *.c *.h
 recursive-include examples *.py
 recursive-include doc/pysparse/source *
 recursive-include test *.py
+exclude pysparse/__config__.py
+exclude pysparse/*/__config__.py
