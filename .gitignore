@@ -1,0 +1,6 @@
+*.svn
+*.so
+*.pyc
+*.egg-info
+__config__.py
+build/
