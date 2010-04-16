@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-"""
-PySparse: A Fast Sparse Matrix Library for Python (Commonsense Computing version)
+"""A fast sparse matrix library for Python (Commonsense Computing version)
 
 Pysparse is a fast sparse matrix library for Python. It provides several sparse
 matrix storage formats and conversion methods. It also implements a number of
@@ -14,9 +13,10 @@ package maintained by the Commonsense Computing Group
 through Pip or easy_install.
 
 Original authors of PySparse:
-R. Geus    <hamsel@sf.net>
-D. Orban   <d-orban@sf.net>
-D. Wheeler <wd15@sf.net>
+
+- R. Geus    <hamsel@sf.net>
+- D. Orban   <d-orban@sf.net>
+- D. Wheeler <wd15@sf.net>
 
 Packaged by: Rob Speer <rspeer@mit.edu>
 """
@@ -37,8 +37,9 @@ CLASSIFIERS = """\
 Development Status :: 4 - Beta
 Intended Audience :: Science/Research
 Intended Audience :: Developers
-License :: BSD-style
-Programming Language :: C, Python
+License :: OSI Approved :: BSD License
+Programming Language :: Python
+Programming Language :: C
 Topic :: Software Development
 Topic :: Scientific/Engineering
 Operating System :: Microsoft :: Windows
