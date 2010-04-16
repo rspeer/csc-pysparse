@@ -1,5 +1,6 @@
 version = '1.1.1'
 release = False
 
-if not release:
-    version += '-dev'
+# for csc downstream releases
+downstream_version = '0'
+version = '%s.%s' % (version, downstream_version)
