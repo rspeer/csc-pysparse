@@ -9,11 +9,11 @@ def configuration(parent_package='',top_path=None):
     config = Configuration('pysparse', parent_package, top_path)
 
     config.add_subpackage('sparse')
-    config.add_subpackage('eigen')
-    config.add_subpackage('direct')
-    config.add_subpackage('itsolvers')
-    config.add_subpackage('precon')
-    config.add_subpackage('tools')
+    #config.add_subpackage('eigen')
+    #config.add_subpackage('direct')
+    #config.add_subpackage('itsolvers')
+    #config.add_subpackage('precon')
+    #config.add_subpackage('tools')
     config.add_subpackage('misc')
     #config.add_data_dir('tests')
 
