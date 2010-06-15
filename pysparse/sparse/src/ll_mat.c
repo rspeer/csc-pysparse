@@ -876,12 +876,8 @@ static PyObject *getSubMatrix_FromList(LLMatObject *self,
       free(jcol);
       if( res ) {
         Py_DECREF(dst);
-        free(irow);
-        free(jcol);
         return NULL;
       }
-      free(irow);
-      free(jcol);
       return (PyObject *)dst;
   }
 
